@@ -19,5 +19,5 @@ alert(`You are ${age} years old!`);
 let isStudent = confirm("Are you student?");
 alert(isStudent);
 
-name = prompt("What is your name?", "Zhanserik");
+name = prompt("What is your name?", "Ramadan");
 alert(name);

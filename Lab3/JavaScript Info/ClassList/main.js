@@ -9,7 +9,7 @@ function createNewBox(){
    box.classList.add("box");
    box.innerHTML = `
                   <button class="btn">click</button>
-                  <span>Zhanserik</span>
+                  <span>Ramadan</span>
                 `;
 
    document.getElementById('container').appendChild(box);

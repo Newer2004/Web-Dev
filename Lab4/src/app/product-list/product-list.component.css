@@ -1,0 +1,42 @@
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/
+
+#show-details{
+   background-color: orange;
+}
+
+.show-and-share{
+   display: flex;
+   flex-direction: column;
+   width: 130px;
+}
+#show-details{
+   margin-bottom: 20px;
+}
+
+.icon-buttons{
+   width: 20px;
+   height: 20px;
+   background-color: white;
+   margin-right: 20px;
+}
+
+.icon{
+   width: 30px;
+   height: 30px;
+}
+
+.product{
+   transform: scale(0.5); 
+   width: 350px; 
+   height: 220px;
+}
+
+.line{
+   width: 1300px;
+   height: 1px;
+   background-color: rgb(219, 219, 219);
+}

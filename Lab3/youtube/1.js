@@ -4,7 +4,7 @@ console.log("Assalamualeikum!")
 
 // variable
 let age = 18;
-var name = "Zhanserik";
+var name = "Ramadan";
 const ok = true;
 console.log(age);
 console.log(name);
@@ -20,7 +20,7 @@ document.getElementById("p3").innerHTML = "Are you stupid ? - " + ok;
 console.log(typeof(20));
 console.log(typeof("Ansar"));
 console.log(typeof(2.5)); //not double, float! just number
-console.log({name : "Zhanserik", "age" : "18"})
+console.log({name : "Ramadan", "age" : "18"})
 
 // write
 document.write("Mukhammed\n")

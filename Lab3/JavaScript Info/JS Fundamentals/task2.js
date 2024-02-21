@@ -9,3 +9,4 @@ let currentVisitor;
 let BIRTHDAY = '18.04.1982'; 
 let age = BIRTHDAY.substr(0, 2);
 console.log(age);
+alert(age)
