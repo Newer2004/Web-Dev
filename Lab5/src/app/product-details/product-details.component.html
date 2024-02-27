@@ -1,0 +1,8 @@
+<div class="details-box">
+
+  <h3>{{ detailedProduct.name }}</h3>
+  <h4>{{ detailedProduct.price | currency: 'KZT' }}</h4>
+  <p class="description">{{ detailedProduct.description }}</p>
+  <button (click)="addToCart()">Buy</button>
+
+</div>
