@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { FormBuilder } from '@angular/forms';
 
-import { CartService } from '../cart.service';
+import { CartService } from '../../../../Lab4/src/app/cart.service';
 
 @Component({
   selector: 'app-cart',
