@@ -1,0 +1,11 @@
+{% extends "root.html" %}
+
+{% block title %} {{ member.firstName }}'s Details {% endblock %}
+
+{% block content %}
+    <h1> {{ member.firstName }} {{ member.lastName }}</h1>
+    <h4> {{ member.age }} </h4>
+    <h3> {{ member.address }} </h3>
+
+    <h6>Back to <a href="/myurl/members">Members</a> </h6>
+{% endblock %}
