@@ -1,37 +1,35 @@
-<div id="albumModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="photoModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" [routerLink]="['/albums', _albumId]" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h1 class="text-center">
                     <span class="fa-stack fa-1x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
-                    </span>Add Photo to Album
+                    </span>Add Photo
                 </h1>
             </div>
             <div class="modal-body">
-                <form class="form col-md-12 center-block" #addImageAlbum="ngForm">
+                <form class="form col-md-12 center-block" (submit)="addPhoto()">
                     <div class="form-group">
-                        <div class="input-group">
-                            <label class="input-group-btn">
-                                <span class="btn btn-lg btn-primary btn-block">
-                                    Upload <input type="file" #photo style="display: none;" (change)="uploadChanged()">
-                                </span>
-                            </label>
-                            <input type="text" class="form-control input-lg" placeholder="Photo title" [(ngModel)]="_title"
-                                required  maxlength="30"
-                                name="title" id="title" ngControl="title" #title="ngModel" />
-                        </div>
+                        <input type="text" class="form-control input-lg" placeholder="Photo title" [(ngModel)]="_title"
+                            required minlength="2" maxlength="30"
+                            name="title" id="title" ngControl="title" #title="ngModel" />
                         <div [hidden]="title.valid || title.untouched" class="alert alert-danger">
+                            <span *ngIf="title.errors && title.errors.required">
                                 Title is required
-                        </div>
-                        <div [hidden]="_attachment" class="alert alert-info">
-                                Upload file please
+                            </span>
+                            <span *ngIf="title.errors && title.errors.minlength">
+                                Title is too short (minimum 2 characters)
+                            </span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-lg btn-block" (click)="upload()" [disabled]="!title.valid || !_attachment || _disabled">Add</button>
+                        <input type="file" class="form-control input-lg" (change)="onImageChange($event)">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!_title || !_image">Add Photo</button>
                     </div>
                 </form>
             </div>

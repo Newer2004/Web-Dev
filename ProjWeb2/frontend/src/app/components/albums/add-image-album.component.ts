@@ -1,54 +1,49 @@
-import { Component, ViewChild, OnInit} from '@angular/core';
-import { Router, ActivatedRoute }  from '@angular/router';
-
-import { DataService } from '../../services/data.service'
+import { Component } from '@angular/core';
+import { DataService } from '../../services/data.service';
 import { NotificationService } from '../../services/notification.service';
-import { IAlbum } from '../../models/album';
-
 
 @Component({
-    selector: 'add-image-album',
-    templateUrl: 'static/app/components/albums/add-image-album.component.html',
+  selector: 'app-add-image-album',
+  templateUrl: './add-image-album.component.html',
 })
-export class AddImageAlbumComponent implements OnInit {
-    private _title: string;
-    private _photo: any;
-    private _attachment: boolean;
-    private _albumId: number;
-    private _userId: number;
-    private _disabled: boolean = false;
-    @ViewChild("photo") photo;
+export class AddImageAlbumComponent {
+  private _title: string = '';
+  private _userId: number = 0;
+  private _image: any = null; // Add private field for image
 
-    constructor(private route: ActivatedRoute,
-        public router: Router,
-        public dataService: DataService,
-        public notificationService: NotificationService) { }
+  constructor(
+    private dataService: DataService,
+    private notificationService: NotificationService
+  ) {}
 
-    ngOnInit() {
-        this.route.params.subscribe(params =>{
-            this._albumId = params['id'];
-        })
-        this._userId = this.dataService.getCurrentUserId();
+  addPhoto() {
+    if (!this._title || !this._userId || !this._image) {
+      this.notificationService.printErrorMessage('Title, user ID, and image are required.');
+      return;
     }
 
-    uploadChanged(): void {
-        let fi = this.photo.nativeElement;
-        this._attachment = (fi.files && fi.files[0])? true : false;
-    }
+    this.dataService.createPhoto(this._image, this._title).subscribe(
+      () => {
+        // Handle success
+        this.notificationService.printSuccessMessage('Photo added successfully.');
+        this.clearFields();
+      },
+      (error: any) => { // Specify the type of 'error' parameter explicitly
+        // Handle error
+        this.notificationService.printErrorMessage('Failed to add photo.');
+      }
+    );
+  }
 
-    upload(): void {
-        let fi = this.photo.nativeElement;
-        if (fi.files && fi.files[0]) {
-            let fileToUpload = fi.files[0];
-            this._disabled = true;
-            this.dataService.createPhoto(fileToUpload, this._title, this._albumId)
-                .subscribe(res => {
-                    this.router.navigate(['/albums', this._albumId]);
-                    this.notificationService.printSuccessMessage(this._title + ' uploaded!');
-                },
-                error => {
-                    this.notificationService.printErrorMessage(error);
-                });
-        }
+  onImageChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this._image = event.target.files[0];
     }
+  }
+
+  clearFields() {
+    this._title = '';
+    this._userId = 0;
+    this._image = null;
+  }
 }
